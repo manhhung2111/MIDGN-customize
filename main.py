@@ -61,9 +61,8 @@ def main():
     bi_graph = assist_data.ground_truth_b_i
 
     #  metric
-    metrics = [Recall(20), NDCG(20),Precision(20), Recall(40), NDCG(40), Precision(40), Recall(80), NDCG(80), Precision(80)]
-    test_metrics = [Recall(20), NDCG(20), Precision(20), Recall(40), NDCG(40), Precision(40), Recall(80), NDCG(80),
-               Precision(80)]
+    metrics = [Recall(1), NDCG(1),Recall(3), NDCG(3), Recall(5), NDCG(5), Recall(10), NDCG(10), Recall(20), NDCG(20)]
+    test_metrics = [Recall(1), NDCG(1),Recall(3), NDCG(3), Recall(5), NDCG(5), Recall(10), NDCG(10), Recall(20), NDCG(20)]
     TARGET = 'Recall@20'
 
     #  loss
@@ -171,7 +170,8 @@ def init_best_metrics(test_metrics):
     return best_metrics
 
 def get_best_epoch(metrics, best_metrics, epoch):
-    if metrics[0].metric > best_metrics[metrics[0].get_title()] and metrics[1].metric > best_metrics[metrics[1].get_title()]:
+    n = len(metrics)
+    if metrics[len-1].metric > best_metrics[metrics[len-1].get_title()] and metrics[len-2].metric > best_metrics[metrics[len-2].get_title()]:
         topk_ = 20  
         print("top%d as the final evaluation standard" %(topk_))
         for metric in metrics:
