@@ -112,6 +112,8 @@ def main():
             print('load model and continue training')
 
         retry = CONFIG['retry']  # =1
+        best_metrics = init_best_metrics(test_metrics=test_metrics)
+
         while retry >= 0:
             # log
             log.update_modelinfo(info,
@@ -132,9 +134,8 @@ def main():
                     if epoch % CONFIG['test_interval'] == 0:
                         output_metrics = test(model, eval_loader, device, CONFIG, metrics)
                         test_metrics = test(model, test_loader, device, CONFIG, test_metrics)
-                        # print(f"Test metrics: {test_metrics}")
-                        for metric in test_metrics:
-                            print(f"Test metric {metric.get_title()}: {metric.metric}")
+                        
+                        get_best_epoch(test_metrics, best_metrics=best_metrics, epoch=epoch)
 
                         for metric in output_metrics:
                             eval_writer.add_scalars('metric/all', {metric.get_title(): metric.metric}, epoch)
@@ -161,6 +162,23 @@ def main():
             #    retry -= 1
     log.close()
 
+def init_best_metrics(test_metrics):
+    best_metrics = {}
+
+    for topk in test_metrics:
+        best_metrics[topk.get_title()] = 0
+
+    return best_metrics
+
+def get_best_epoch(metrics, best_metrics, epoch):
+    if metrics[0] > best_metrics[metrics[0].get_title()] and metrics[1] > best_metrics[metrics[1].get_title()]:
+        topk_ = 20  
+        print("top%d as the final evaluation standard" %(topk_))
+        for metric in metrics:
+            best_metrics[metric.get_title()] = metric.metric
+            print(f"Best in epoch: {epoch+1}, {metric.get_title()}: {metric.metric}")
+        
+    
 
 if __name__ == "__main__":
     main()
