@@ -134,7 +134,7 @@ def main():
                         test_metrics = test(model, test_loader, device, CONFIG, test_metrics)
                         # print(f"Test metrics: {test_metrics}")
                         for metric in test_metrics:
-                            print(f"Test metric {metric.get_title}: {metric.metric}")
+                            print(f"Test metric {metric.get_title()}: {metric.metric}")
 
                         for metric in output_metrics:
                             eval_writer.add_scalars('metric/all', {metric.get_title(): metric.metric}, epoch)
