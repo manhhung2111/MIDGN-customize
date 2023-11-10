@@ -8,7 +8,7 @@ CONFIG = {
     'gpu_id': "0",
     'note': 'some_note',
     'model': 'MIDGN',
-    'dataset_name': 'clothing',
+    'dataset_name': 'electronic',
     'task': 'tune',
     'eval_task': 'test',
 
@@ -22,7 +22,7 @@ CONFIG = {
     'sample': 'simple',
     'hard_window': [0.7, 1.0], # top 30%
     'hard_prob': [0.3, 0.3], # probability 0.8
-    'conti_train': 'log/clothing/',
+    'conti_train': 'log/electronic/',
 
     ## other settings
     'epochs': 500,
@@ -32,6 +32,6 @@ CONFIG = {
     'retry': 1,
 
     ## test path
-    'test':['log/clothing']
+    'test':['log/electronic']
 }
 
