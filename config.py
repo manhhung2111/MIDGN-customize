@@ -8,7 +8,7 @@ CONFIG = {
     'gpu_id': "0",
     'note': 'some_note',
     'model': 'MIDGN',
-    'dataset_name': 'food',
+    'dataset_name': 'electronic',
     'task': 'tune',
     'eval_task': 'test',
 
@@ -22,16 +22,16 @@ CONFIG = {
     'sample': 'simple',
     'hard_window': [0.7, 1.0], # top 30%
     'hard_prob': [0.3, 0.3], # probability 0.8
-    'conti_train': 'log/food/',
+    'conti_train': 'log/electronic/',
 
     ## other settings
-    'epochs': 500,
+    'epochs': 1000,
     'early': 50,
     'log_interval': 20,
     'test_interval': 1,
     'retry': 1,
 
     ## test path
-    'test':['log/food']
+    'test':['log/electronic']
 }
 
