@@ -171,12 +171,13 @@ def init_best_metrics(test_metrics):
 
 def get_best_epoch(metrics, best_metrics, epoch):
     n = len(metrics)
-    if metrics[n-1].metric > best_metrics[metrics[n-1].get_title()] and metrics[n-2].metric > best_metrics[metrics[n-2].get_title()]:
-        topk_ = 20  
-        print("top%d as the final evaluation standard" %(topk_))
+    if metrics[2].metric > best_metrics[metrics[2].get_title()] and metrics[3].metric > best_metrics[metrics[3].get_title()]:
+        topk_ = 3  
+        print(f"Top% {topk_} - {metrics[2].get_title()}, {metrics[3].get_title()} as the final evaluation standard")
         for metric in metrics:
             best_metrics[metric.get_title()] = metric.metric
-            print(f"Best in epoch: {epoch+1}, {metric.get_title()}: {metric.metric}")
+            print(f"Best in epoch {epoch+1}, {metric.get_title()}: {metric.metric}")
+
         
     
 
